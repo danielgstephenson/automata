@@ -22,7 +22,8 @@ export class Renderer {
   choiceColors = [
     'hsl(0, 0%, 0%)',
     'hsl(200, 100%, 50%)',
-    'hsl(120, 75%, 40%)'
+    'hsl(120, 75%, 40%)',
+    'hsl(50, 100%, 50%)'
   ]
 
   stateColors = [
@@ -59,8 +60,8 @@ export class Renderer {
       rect.click(_ => {
         if (this.game.state !== 'decision') return
         if (cell.x === mid && cell.y === mid) return
-        const otherTeam = this.game.team === 1 ? this.game.teams[2] : this.game.teams[1]
-        if (otherTeam.oldChoices.includes(cell.index)) return
+        if (this.game.teams[1].oldChoices.includes(cell.index)) return
+        if (this.game.teams[2].oldChoices.includes(cell.index)) return
         if (cell.index === this.client.choices[0]) {
           this.client.choices = []
         } else {
@@ -70,6 +71,7 @@ export class Renderer {
         this.client.socket.emit('choices', this.client.choices)
       })
     })
+    this.updateManifold()
   }
 
   getColor (cell: CellSummary): string {
@@ -134,7 +136,7 @@ export class Renderer {
       const rect = this.squares[cell.index]
       if (rect == null) return
       rect.front()
-      const color = 'hsl(50, 100%, 50%)'
+      const color = this.choiceColors[3]
       rect.stroke({ color, opacity: 1, width: 0.05 })
     })
   }
