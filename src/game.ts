@@ -5,16 +5,6 @@ import { Server } from './server'
 import { GameSummary } from './summaries/gameSummary'
 import { Team } from './team'
 
-// DONE:
-// Red shapes more contiguous
-// More red units
-// Red unit Growth
-// Red unit Destruction
-
-// TO DO:
-// Use ring color to indicate score (green, grey, blue)
-// When all red are destroyed highest score wins
-
 export class Game {
   server = new Server()
   manifold = new Manifold()
